@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial-Hotels</title>
+</head>
+<body>
+    <h2>Edit the required details</h2>
+     <form method="POST" action="/listings/<%=obj._id%>?_method=PUT">
+        <input type="text" placeholder="enter title" name="title" value="<%=obj.title%>"><br><br>
+        <textarea type="text" placeholder="enter description" name="description" rows="10" cols="20"><%=obj.description%></textarea><br><br>
+        <input type="number" placeholder="enter price" name="price" value="<%=obj.price%>"><br><br>
+        <input type="text" placeholder="enter image url" name="url" value="<%=obj.image.url%>"><br><br>
+        <input type="text" placeholder="enter location" name="location" value="<%=obj.location%>"><br><br>
+        <input type="text" placeholder="enter country" name="country" value="<%=obj.country%>"><br><br>
+        <button>Add</button>
+    </form>
+</body>
+</html>
