@@ -94,6 +94,14 @@ app.put("/listings/:id",async (req,res)=>{
     res.redirect("/listings");
 });
 
+//Route to delete a listing
+app.delete("/listings/:id",async (req,res)=>{
+    let {id} = req.params;
+    await Listing.findByIdAndDelete(id);
+    console.log("Request to delete a listing is received");
+    res.redirect("/listings");
+});
+
 app.listen(8080,()=>{
     console.log("server is running at 8080");
 });
