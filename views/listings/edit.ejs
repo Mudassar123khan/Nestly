@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imperial-Hotels</title>
-</head>
+<% layout("/layouts/boilerplate.ejs") %>
 <body>
     <h2>Edit the required details</h2>
      <form method="POST" action="/listings/<%=obj._id%>?_method=PUT">
@@ -17,4 +11,3 @@
         <button>Add</button>
     </form>
 </body>
-</html>

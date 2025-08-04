@@ -5,11 +5,14 @@ const Listing = require('./models/listing.js');
 const path = require('path');
 const { url } = require('inspector');
 const methodOverRide = require('method-override');
+const ejsMate = require('ejs-mate');
 
 app.use(methodOverRide("_method"));
 app.set("view engine","ejs");
 app.set("views", path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
+app.engine("ejs", ejsMate);
+app.use(express.static(path.join(__dirname,"/public")));
 
 main().then(()=>{
     console.log("mongodb connected");
