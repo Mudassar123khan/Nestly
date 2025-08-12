@@ -6,7 +6,7 @@
 
   
   <h2>Edit the required details</h2>
-  <form method="POST" action="/listings/<%=obj._id%>?_method=PUT">
+  <form method="POST" action="/listings/<%=obj._id%>?_method=PUT" novalidate class="needs-validation">
     <div class="mb-3">
          <label for="title" class="form-label">Title</label>
       <input
@@ -15,7 +15,9 @@
         name="title"
         value="<%=obj.title%>"
         class="form-control"
+        required
       />
+      <div class="invalid-feedback">Please enter a title</div>
     </div>
 
     <div class="mb-3">
@@ -25,9 +27,11 @@
         placeholder="enter description"
         name="description"
         class="form-control"
+        required
       >
 <%=obj.description%></textarea
       >
+      <div class="invalid-feedback">Please enter a description</div>
     </div>
     <div class="mb-3">
          <label for="url" class="form-label">Image Link</label>
@@ -37,6 +41,7 @@
         name="url"
         value="<%=obj.image.url%>"
         class="form-control"
+        required
       />
     </div>
 
@@ -49,7 +54,9 @@
         name="price"
         value="<%=obj.price%>"
         class="form-control"
+        required
       />
+      <div class="invalid-feedback">Please enter price</div>
     </div>
 
      <div class="mb-3 col-md-8">
@@ -60,7 +67,9 @@
         name="country"
         value="<%=obj.country%>"
         class="form-control"
+        required
       />
+      <div class="invalid-feedback">Please enter the country</div>
     </div>
     </div>
 
@@ -72,7 +81,9 @@
         name="location"
         value="<%=obj.location%>"
         class="form-control"
+        required
       />
+      <div class="invalid-feedback">Please enter the location</div>
     </div>
    
     <br /><br />

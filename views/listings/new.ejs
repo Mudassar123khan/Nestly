@@ -4,7 +4,7 @@
     <div class="col-8 offset-2">
         <br><br>
       <h1>New listing</h1>
-      <form method="POST" action="/listings">
+      <form method="POST" action="/listings" novalidate class="needs-validation">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input
@@ -12,7 +12,10 @@
             placeholder="enter title"
             name="title"
             class="form-control"
+            required
           />
+          <div class="valid-feedback">That's a catchy title</div>
+          <div class="invalid-feedback">Please enter a catchy title </div>
         </div>
 
         <div class="mb-3">
@@ -22,7 +25,9 @@
             placeholder="enter description"
             name="description"
             class="form-control"
+            required
           ></textarea>
+          <div class="invalid-feedback">Please enter a description</div>
         </div>
 
         <div class="mb-3">
@@ -32,18 +37,22 @@
             placeholder="enter image url"
             name="url"
             class="form-control"
+            required
           />
+          
         </div>
 
         <div class="row">
           <div class="mb-3 col-md-4">
             <label for="price" class="form-label">Price</label>
             <input
-              type="number"
+             
               placeholder="enter price"
               name="price"
               class="form-control"
+              required
             />
+            <div class="invalid-feedback">Please enter price</div>
             </div>
             <div class="mb-3 col-md-8">
               <label for="country" class="form-label">Country</label>
@@ -52,8 +61,9 @@
                 placeholder="enter country"
                 name="country"
                 class="form-control"
+                required
               />
-            
+            <div class="invalid-feedback">Please enter the country</div>
           </div>
         </div>
 
@@ -64,7 +74,9 @@
             placeholder="enter location"
             name="location"
             class="form-control"
+            required
           />
+          <div class="invalid-feedback">Please enter the location</div>
         </div>
 
         <br /><br />
