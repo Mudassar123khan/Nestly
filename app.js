@@ -8,7 +8,9 @@ const methodOverRide = require('method-override');
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/wrapAsync.js');
 const ExpressError = require('./utils/ExpressError.js');
-const listingValidationSchema = require('./schema.js');
+const {listingValidationSchema,reviewSchema} = require('./schema.js');
+
+const Review = require('./models/review.js');
 
 app.use(methodOverRide("_method"));
 app.set("view engine","ejs");
@@ -20,6 +22,15 @@ app.use(express.static(path.join(__dirname,"/public")));
 
 const validateListing = (req,res,next)=>{
   let {error} = listingValidationSchema.validate(req.body);
+  if(error){
+    let errMsg = error.details.map((el)=> el.message).join(",");
+    throw new ExpressError(400,errMsg);
+  }else{
+    next();
+  }
+}
+const validateReview = (req,res,next)=>{
+  let {error} = reviewSchema.validate(req.body);
   if(error){
     let errMsg = error.details.map((el)=> el.message).join(",");
     throw new ExpressError(400,errMsg);
@@ -82,7 +93,7 @@ app.get("/listings",wrapAsync(async (req,res)=>{
 //Route to show the info of only one listng
 app.get("/listings/:id",wrapAsync(async (req,res)=>{
     let {id} = req.params;
-    let details =await Listing.findById(id);
+    let details =await Listing.findById(id).populate("reviews");
     console.log(`Request to show listing is received with id ${id}`);
     res.render("listings/show.ejs",{details});
 }));
@@ -123,6 +134,27 @@ app.delete("/listings/:id",wrapAsync(async (req,res)=>{
     await Listing.findByIdAndDelete(id);
     console.log("Request to delete a listing is received");
     res.redirect("/listings");
+}));
+
+//Route to add a review to a listing
+app.post("/listings/:id/reviews",validateReview, wrapAsync(async (req,res)=>{
+    let listing =await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+    listing.reviews.push(newReview);
+    await newReview.save();
+    console.log(newReview);
+    console.log("Review Added");
+    await listing.save();  
+    res.redirect(`/listings/${listing._id}`);
+}));
+
+//Route to delete a review
+app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>{
+    let {id,reviewId} = req.params;
+    console.log("delete request received");
+    await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/listings/${id}`);
 }));
 
 //Error Handling route

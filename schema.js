@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const listingValidationSchema = Joi.object({
+module.exports.listingValidationSchema = Joi.object({
     title: Joi.string()
         .required()
         .messages({
@@ -51,4 +51,9 @@ const listingValidationSchema = Joi.object({
         })
 });
 
-module.exports = listingValidationSchema;
+module.exports.reviewSchema = Joi.object({
+    review:Joi.object({
+        comment:Joi.string().required(),
+        rating:Joi.number().required().min(1).max(5)
+    }).required()
+});
