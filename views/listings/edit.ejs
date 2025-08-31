@@ -1,95 +1,97 @@
 <% layout("/layouts/boilerplate.ejs") %>
 <body>
-    <div class="row">
-
-   <div class="col-8 offset-2">
-
-  
-  <h2>Edit the required details</h2>
-  <form method="POST" action="/listings/<%=obj._id%>?_method=PUT" novalidate class="needs-validation">
-    <div class="mb-3">
-         <label for="title" class="form-label">Title</label>
-      <input
-        type="text"
-        placeholder="enter title"
-        name="title"
-        value="<%=obj.title%>"
-        class="form-control"
-        required
-      />
-      <div class="invalid-feedback">Please enter a title</div>
-    </div>
-
-    <div class="mb-3">
-         <label for="description" class="form-label">Description</label>
-      <textarea
-        type="text"
-        placeholder="enter description"
-        name="description"
-        class="form-control"
-        required
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h2>Edit the required details</h2>
+      <form
+        method="POST"
+        action="/listings/<%=obj._id%>?_method=PUT"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
       >
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            placeholder="enter title"
+            name="title"
+            value="<%=obj.title%>"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please enter a title</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            type="text"
+            placeholder="enter description"
+            name="description"
+            class="form-control"
+            required
+          >
 <%=obj.description%></textarea
-      >
-      <div class="invalid-feedback">Please enter a description</div>
-    </div>
-    <div class="mb-3">
-         <label for="url" class="form-label">Image Link</label>
-      <input
-        type="text"
-        placeholder="enter image url"
-        name="url"
-        value="<%=obj.image.url%>"
-        class="form-control"
-        required
-      />
-    </div>
+          >
+          <div class="invalid-feedback">Please enter a description</div>
+        </div>
+        <div class="mb-3">
+          <label for="url" class="form-label">Upload Image</label>
+          <input
+            type="file"
+            name="url"
+            value="<%=obj.image.url%>"
+            class="form-control"
+          
+          />
+        </div>
 
-    <div class="row">
-         <div class="mb-3 col-md-4">
-         <label for="price" class="form-label">Price</label>
-      <input
-        type="number"
-        placeholder="enter price"
-        name="price"
-        value="<%=obj.price%>"
-        class="form-control"
-        required
-      />
-      <div class="invalid-feedback">Please enter price</div>
-    </div>
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input
+              type="number"
+              placeholder="enter price"
+              name="price"
+              value="<%=obj.price%>"
+              class="form-control"
+              required
+            />
+            <div class="invalid-feedback">Please enter price</div>
+          </div>
 
-     <div class="mb-3 col-md-8">
-         <label for="country" class="form-label">Country</label>
-      <input
-        type="text"
-        placeholder="enter country"
-        name="country"
-        value="<%=obj.country%>"
-        class="form-control"
-        required
-      />
-      <div class="invalid-feedback">Please enter the country</div>
-    </div>
-    </div>
+          <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input
+              type="text"
+              placeholder="enter country"
+              name="country"
+              value="<%=obj.country%>"
+              class="form-control"
+              required
+            />
+            <div class="invalid-feedback">Please enter the country</div>
+          </div>
+        </div>
 
-    <div class="mb-3">
-         <label for="location" class="form-label">Location</label>
-      <input
-        type="text"
-        placeholder="enter location"
-        name="location"
-        value="<%=obj.location%>"
-        class="form-control"
-        required
-      />
-      <div class="invalid-feedback">Please enter the location</div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            placeholder="enter location"
+            name="location"
+            value="<%=obj.location%>"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please enter the location</div>
+        </div>
+
+        <br /><br />
+        <button class="btn add-btn btn-dark">Add</button>
+      </form>
     </div>
-   
-    <br /><br />
-    <button class="btn add-btn btn-dark">Add</button>
-  </form>
-   </div>
-   </div>
-   <br /><br />
+  </div>
+  <br /><br />
 </body>

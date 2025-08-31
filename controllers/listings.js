@@ -31,20 +31,21 @@ module.exports.showListing = async (req, res) => {
 
   module.exports.createListing = async (req, res) => {
     console.log("Request to post the data to DB is received");
-
-    let { title, description, price, url, location, country } = req.body;
+    let url = req.file.path;
+    let filename = req.file.filename;
+    let { title, description, price, location, country } = req.body;
     const listingData = {
       title,
       description,
       image: {
         url: url,
+        filename:filename
       },
       price,
       location,
       country,
     };
     listingData.owner = req.user._id;
-    console.log(listingData.owner);
     await Listing.create(listingData);
     req.flash("success", "New listing added");
     res.redirect("/listings");
@@ -63,8 +64,9 @@ module.exports.showListing = async (req, res) => {
 
     module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
-    let { title, description, price, url, location, country } = req.body;
-    if (!title || !description || !price || !url || !location || !country) {
+   
+    let { title, description, price,location, country } = req.body;
+    if (!title || !description || !price || !location || !country) {
       throw new ExpressError(
         400,
         "All the fields are required!! Please send data"
@@ -76,16 +78,20 @@ module.exports.showListing = async (req, res) => {
     let updatedListing = {
       title: title,
       description: description,
-      image: {
-        url: url,
-      },
       price: price,
       location: location,
       country: country,
       owner: owner,
     };
 
-    await Listing.findByIdAndUpdate(id, { ...updatedListing });
+    let newListing= await Listing.findByIdAndUpdate(id, { ...updatedListing });
+    
+    if(typeof req.file !=="undefined"){
+       let url = req.file.path;
+    let filename = req.file.filename;
+    newListing.image = {url,filename};
+    await newListing.save();
+    }
     console.log("edits saved");
     req.flash("success", "Listing Updated");
     res.redirect(`/listings`);

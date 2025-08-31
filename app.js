@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !="production"){
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const mongoose= require('mongoose');
@@ -9,10 +13,12 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user.js');
+const dbUrl = process.env.ATLASDB_URL;
 
 app.use(methodOverRide("_method"));
 app.set("view engine","ejs");
@@ -22,8 +28,22 @@ app.use(express.json());
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 app.use(flash());
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter:24*3600,
+});
+
+store.on("error",()=>{
+    console.log("ERROR IN MONGO SESSION STORE",error);
+});
+
 const sessionOptions = {
-    secret:"mmk",
+    store,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
@@ -32,6 +52,8 @@ const sessionOptions = {
         httpOnly:true
     }
 };
+
+
 //Using Sessions
 app.use(session(sessionOptions));
 
@@ -51,14 +73,9 @@ main().then(()=>{
 
 //Connecting our database using mongoose
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/imperial_hotels');
+    await mongoose.connect(dbUrl);
 }
 
-//home route
-app.get("/", (req,res)=>{
-    console.log("homepage was accessed");
-    res.send("Home Page");
-});
 
 
 app.use((req,res,next)=>{
