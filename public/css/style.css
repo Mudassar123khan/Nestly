@@ -45,6 +45,10 @@ body{
     margin-right: 1rem;
 }
 
+.f-info-socials a i{
+    color:#222222;
+}
+
 .f-info{
     display: flex;
     height: 8rem;
