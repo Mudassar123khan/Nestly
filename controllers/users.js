@@ -12,7 +12,7 @@ module.exports.signUp = async (req, res) => {
         if (err) {
           return next(err);
         }
-        req.flash("success", "Welcome to Imperial Hotels!");
+        req.flash("success", "Welcome to Nestly!");
         return res.redirect("/listings");
       });
     } catch (e) {
