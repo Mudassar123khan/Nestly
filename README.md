@@ -1,4 +1,4 @@
-# IMPERIAL\_HOTELS
+# Nestly
 
 ### Transforming Spaces, Elevating Experiences Seamlessly
 
@@ -6,9 +6,9 @@
 
 ## Overview
 
-Imperial\_hotels is a full-featured developer toolkit for building scalable, data-driven property listing platforms. It's designed to streamline the development of real estate applications by combining robust data validation, secure user authentication, and seamless media management.
+Nestly is a full-featured developer toolkit for building scalable, data-driven property listing platforms. It's designed to streamline the development of real estate applications by combining robust data validation, secure user authentication, and seamless media management.
 
-### Why Imperial\_hotels?
+### Why Nestly?
 
 This project simplifies creating dynamic property marketplaces by providing core features:
 
@@ -32,18 +32,18 @@ This project requires the following dependencies:
 
 ### Installation
 
-To get started, build Imperial\_hotels from the source and install its dependencies:
+To get started, build Nestly from the source and install its dependencies:
 
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/Mudassar123khan/Imperial_hotels
+    git clone https://github.com/Mudassar123khan/Nestly
     ```
 
 2.  **Navigate to the project directory:**
 
     ```bash
-    cd Imperial_hotels
+    cd Nestly
     ```
 
 3.  **Install the dependencies:**
@@ -59,14 +59,14 @@ To get started, build Imperial\_hotels from the source and install its dependenc
 Run the project with npm:
 
 ```bash
-npm start
+npm run dev
 ```
 
 -----
 
 ## Testing
 
-Imperial\_hotels uses a test framework. Run the test suite with:
+Nestly uses a test framework. Run the test suite with:
 
 ```bash
 npm test
